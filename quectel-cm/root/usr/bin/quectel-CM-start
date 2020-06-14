@@ -1,0 +1,13 @@
+#!/bin/sh
+
+CUR_PID=-1
+
+trap 'kill -2 $CUR_PID || true; exit' 12
+
+while true; do
+        quectel-CM &
+		CUR_PID=$!
+        wait $CUR_PID
+		sleep 1&
+		wait $!
+done
